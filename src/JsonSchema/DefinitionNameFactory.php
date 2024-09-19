@@ -25,7 +25,7 @@ final class DefinitionNameFactory implements DefinitionNameFactoryInterface
     {
     }
 
-    public function create(string $className, string $format = 'json', ?string $inputOrOutputClass = null, ?Operation $operation = null, array $serializerContext = []): string
+    public function create(string $className, string $format = 'json', ?string $inputOrOutputClass = null, ?Operation $operation = null, array $serializerContext = [], array $validationGroups = []): string
     {
         if ($operation) {
             $prefix = $operation->getShortName();
@@ -50,7 +50,9 @@ final class DefinitionNameFactory implements DefinitionNameFactoryInterface
         if ($definitionName) {
             $name = \sprintf('%s-%s', $prefix, $definitionName);
         } else {
-            $groups = (array) ($serializerContext[AbstractNormalizer::GROUPS] ?? []);
+            $serializerGroups = (array) ($serializerContext[AbstractNormalizer::GROUPS] ?? []);
+            $groups = array_merge($serializerGroups, $validationGroups);
+
             $name = $groups ? \sprintf('%s-%s', $prefix, implode('_', $groups)) : $prefix;
         }
 

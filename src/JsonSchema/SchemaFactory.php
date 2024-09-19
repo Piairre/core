@@ -76,7 +76,7 @@ final class SchemaFactory implements SchemaFactoryInterface, SchemaFactoryAwareI
 
         $validationGroups = $operation ? $this->getValidationGroups($operation) : [];
         $version = $schema->getVersion();
-        $definitionName = $this->definitionNameFactory->create($className, $format, $inputOrOutputClass, $operation, $serializerContext);
+        $definitionName = $this->definitionNameFactory->create($className, $format, $inputOrOutputClass, $operation, $serializerContext, $validationGroups);
 
         $method = $operation instanceof HttpOperation ? $operation->getMethod() : 'GET';
         if (!$operation) {

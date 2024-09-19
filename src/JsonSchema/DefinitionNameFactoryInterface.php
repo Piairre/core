@@ -29,5 +29,5 @@ interface DefinitionNameFactoryInterface
      *
      * @return string the definition name
      */
-    public function create(string $className, string $format = 'json', ?string $inputOrOutputClass = null, ?Operation $operation = null, array $serializerContext = []): string;
+    public function create(string $className, string $format = 'json', ?string $inputOrOutputClass = null, ?Operation $operation = null, array $serializerContext = [], array $validationGroups = []): string;
 }
